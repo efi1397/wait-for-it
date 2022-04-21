@@ -7,7 +7,7 @@ This tool prevents the application from crash loop until interdependent services
 
 You can get `wait-for-it` command line tool from the [releases](https://github.com/efi1397/wait-for-it/releases) section in this `github` project.   
 
-```console
+```sh
 foo@bar:~$ wait-for-it
 
 Usage:
@@ -27,7 +27,7 @@ Use "wait-for-it [command] --help" for more information about a command.
 
 Suppose we want to execute an entrypoint which depends on database host (`http://database/healthchecks`) and message broker host (`http://rabbitmq/healthchecks`).  
 For this scenario we need to execute this command:  
-```console
+```sh
 foo@bar:~$ wait-for-it wait --hosts  http://rabbitmq/healthchecks,http://database/healthchecks --entrypoint "echo AWESOME!" --timeout 120
 ```
 
