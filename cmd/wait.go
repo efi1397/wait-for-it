@@ -1,7 +1,3 @@
-/*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
-
-*/
 package cmd
 
 import (
@@ -20,7 +16,7 @@ import (
 // waitCmd represents the wait command
 var waitCmd = &cobra.Command{
 	Use:   "wait",
-	Short: "Wait for hosts healthcheks and execute an entrypoint",
+	Short: "Wait for hosts healthcheks",
 	Long:  `Wait for hosts healthcheks and execute an entrypoint`,
 	Run: func(cmd *cobra.Command, args []string) {
 
@@ -123,7 +119,9 @@ func waitTimeout(hosts []string, timeout int) bool {
 	}
 }
 
-func executeEntrypoint(entrypoint string) {
+func executeEntrypoint(entrypoint string) bool {
+	executeStatus := true
+
 	// Arrange entrypoint for executing
 	entrypointParts := strings.Split(entrypoint, " ")
 
@@ -133,5 +131,8 @@ func executeEntrypoint(entrypoint string) {
 	err := cmd.Run()
 	if err != nil {
 		fmt.Println(err.Error())
+		executeStatus = false
 	}
+
+	return executeStatus
 }
